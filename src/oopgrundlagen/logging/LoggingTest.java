@@ -42,13 +42,10 @@ public class LoggingTest implements Workable {
                 logger.log(Level.INFO,"doWork beendet");
             }
     }
-
     public void testPerson() {
         logger.log(Level.INFO,"testPerson gestartet");
         Person p1 = new Person();
         p1.setAlter(121);
         System.out.println(p1.getAlter());
     }
-
-
 }
