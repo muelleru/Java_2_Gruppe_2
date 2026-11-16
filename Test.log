@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2026-11-16T13:35:19.827948100Z</date>
+  <millis>1794836119827</millis>
+  <nanos>948100</nanos>
+  <sequence>0</sequence>
+  <logger>OOP_Grundlagen</logger>
+  <level>SEVERE</level>
+  <class>oopgrundlagen.OopGrundlagen</class>
+  <method>doWork</method>
+  <thread>3</thread>
+  <message>Fataler Fehler</message>
+</record>
+</log>
+Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest <init>
+INFORMATION: Logger initialisiert
+Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest doWork
+INFORMATION: doWork gestartet
+Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest testPerson
+INFORMATION: testPerson gestartet
+Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest doWork
+SCHWERWIEGEND: Alter 121 ist nicht im Bereich 0 .. 120
+oopgrundlagen.exceptions.AlterOutOfBoundException: Alter 121 ist nicht im Bereich 0 .. 120
+	at oopgrundlagen.exceptions.Person.setAlter(Person.java:20)
+	at oopgrundlagen.logging.LoggingTest.testPerson(LoggingTest.java:49)
+	at oopgrundlagen.logging.LoggingTest.doWork(LoggingTest.java:37)
+	at global.Main.main(Main.java:16)
+
+Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest doWork
+INFORMATION: doWork beendet
+Nov. 16, 2026 2:58:51 PM oopgrundlagen.logging.LoggingTest doWork
+SCHWERWIEGEND: Alter 121 ist nicht im Bereich 0 .. 120
+oopgrundlagen.exceptions.AlterOutOfBoundException: Alter 121 ist nicht im Bereich 0 .. 120
+	at oopgrundlagen.exceptions.Person.setAlter(Person.java:20)
+	at oopgrundlagen.logging.LoggingTest.testPerson(LoggingTest.java:49)
+	at oopgrundlagen.logging.LoggingTest.doWork(LoggingTest.java:37)
+	at global.Main.main(Main.java:16)
+

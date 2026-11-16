@@ -1,6 +1,7 @@
 package oopgrundlagen.logging;
 
 import global.Workable;
+import oopgrundlagen.exceptions.Person;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ public class LoggingTest implements Workable {
         } catch (Exception e) {
             System.out.println("Error creating log-File");
         }
-        logger.setLevel(Level.ALL); // Welche Fehler sollen geloggt werden
+        logger.setLevel(Level.SEVERE); // Welche Fehler sollen geloggt werden
         logger.log(Level.INFO,"Logger initialisiert");
     }
 
@@ -32,9 +33,22 @@ public class LoggingTest implements Workable {
     @Override
     public void doWork() {
             logger.log(Level.INFO,"doWork gestartet");
-
-
-            logger.log(Level.INFO,"doWork beendet");
+            try {
+                testPerson();
+            } catch (Exception e) {
+                // Exception an log übergeben
+                logger.log(Level.SEVERE, e.getMessage(), e);
+            } finally {
+                logger.log(Level.INFO,"doWork beendet");
+            }
     }
+
+    public void testPerson() {
+        logger.log(Level.INFO,"testPerson gestartet");
+        Person p1 = new Person();
+        p1.setAlter(121);
+        System.out.println(p1.getAlter());
+    }
+
 
 }
