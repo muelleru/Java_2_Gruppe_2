@@ -8,6 +8,7 @@ public class Person {
         return alter;
     }
 
+
     public void setAlter(int alter) {
         if (alter >= 0 && alter <= 120) {
             this.alter = alter;

@@ -7,6 +7,11 @@ import oopgrundlagen.exceptions.PersonException;
 import oopgrundlagen.tiere.Hund;
 import oopgrundlagen.tiere.Tier;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class OopGrundlagen implements Workable {
     @Override
     public boolean isActive() {
@@ -14,6 +19,8 @@ public class OopGrundlagen implements Workable {
     }
     @Override
     public void doWork() {
+
+
         System.out.println("Start Grundlagen");
         // testTiere();
         try {
