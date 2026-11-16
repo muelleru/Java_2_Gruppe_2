@@ -3,6 +3,7 @@ package oopgrundlagen;
 import global.Workable;
 import oopgrundlagen.exceptions.AlterOutOfBoundException;
 import oopgrundlagen.exceptions.Person;
+import oopgrundlagen.exceptions.PersonException;
 import oopgrundlagen.tiere.Hund;
 import oopgrundlagen.tiere.Tier;
 
@@ -15,8 +16,28 @@ public class OopGrundlagen implements Workable {
     public void doWork() {
         System.out.println("Start Grundlagen");
         // testTiere();
-        testException();
+        try {
+            testException();
+            testException2();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    public void testException2() /*throws PersonException*/{
+        Person p1 = new Person();
+        p1.setAlter(66);
+        try {
+            p1.setAlterV2(167);
+        } catch (PersonException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Person erstellen abgebrochen");
+            //throw e;
+        } finally {
+            System.out.println("Wird immer ausgeführt");
+        }
+    }
+
     public void testException() {
 
         Person p1 = new Person();
