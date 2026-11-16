@@ -1,4 +1,4 @@
-package oopgrundlagen;
+package oopgrundlagen.tiere;
 
 public abstract class Tier {
     // Kein Objekt vom Typ Tier
@@ -6,6 +6,8 @@ public abstract class Tier {
     private String farbe;
     protected int energie;
     private String name;
+
+
 
     public Tier(int nummer, String farbe) {
         this.nummer = nummer; // setNummer

@@ -1,7 +1,8 @@
 package oopgrundlagen;
 
-
 import global.Workable;
+import oopgrundlagen.tiere.Hund;
+import oopgrundlagen.tiere.Tier;
 
 public class OopGrundlagen implements Workable {
     @Override
@@ -17,6 +18,8 @@ public class OopGrundlagen implements Workable {
     public void testTiere() {
         Tier t1 = new Hund(1,"Rot","Dackel",true).setName("Larsi");
         /*Tier*/ // t1 = new Katze(2,"Schwarz",5,true).setName("Minka");
+
+
 
         System.out.println(t1);
         t1.fressen(20);

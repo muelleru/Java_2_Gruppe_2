@@ -1,4 +1,4 @@
-package oopgrundlagen;
+package oopgrundlagen.tiere;
 
 public class Katze extends Tier {
 

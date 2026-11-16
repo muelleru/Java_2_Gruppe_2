@@ -1,4 +1,4 @@
-package oopgrundlagen;
+package oopgrundlagen.tiere;
 
 public class Hund extends Tier{
 
