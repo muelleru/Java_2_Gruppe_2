@@ -6,7 +6,13 @@ public class Person {
 
     public int getAlter() {return alter;}
     public void setAlter(int alter) {
-        this.alter = alter;
+        if(alter >= 0 && alter <=120) {
+            this.alter = alter;
+        } else {
+            // RuntimeException() kann man abfangen
+            // Exception()        muss man abfangen!
+            throw new AlterOutOfBoundException();
+        }
     }
 
 
