@@ -11,7 +11,7 @@ public class Person {
         } else {
             // RuntimeException() kann man abfangen
             // Exception()        muss man abfangen!
-            throw new AlterOutOfBoundException();
+            throw new AlterOutOfBoundException(alter, 0, 120);
         }
     }
 
