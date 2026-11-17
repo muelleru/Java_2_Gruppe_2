@@ -1,5 +1,6 @@
 package global;
 
+import algodat.AlgoDat;
 import oopgrundlagen.OopGrundlagen;
 import oopgrundlagen.logging.LoggingTest;
 import programmierkonzepte.garbagecollector.GarbageCollector;
@@ -17,6 +18,7 @@ public class Main {
         workables.add(new GarbageCollector());
         workables.add(new Reflections());
         workables.add(new Module());
+        workables.add(new AlgoDat());
         for(Workable w : workables) {
             if(w.isActive()) {
                 w.doWork();
