@@ -3,6 +3,7 @@ package global;
 import oopgrundlagen.OopGrundlagen;
 import oopgrundlagen.logging.LoggingTest;
 import programmierkonzepte.garbagecollector.GarbageCollector;
+import programmierkonzepte.module.Module;
 import programmierkonzepte.reflections.Reflections;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Main {
         workables.add(new LoggingTest());
         workables.add(new GarbageCollector());
         workables.add(new Reflections());
+        workables.add(new Module());
         for(Workable w : workables) {
             if(w.isActive()) {
                 w.doWork();

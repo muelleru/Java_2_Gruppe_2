@@ -26,7 +26,7 @@ oopgrundlagen.exceptions.AlterOutOfBoundException: Alter 121 ist nicht im Bereic
 	at oopgrundlagen.exceptions.Person.setAlter(Person.java:20)
 	at oopgrundlagen.logging.LoggingTest.testPerson(LoggingTest.java:49)
 	at oopgrundlagen.logging.LoggingTest.doWork(LoggingTest.java:37)
-	at global.Main.main(Main.java:16)
+	at global.Main.main(global.global.Main.java:16)
 
 Nov. 16, 2026 2:57:03 PM oopgrundlagen.logging.LoggingTest doWork
 INFORMATION: doWork beendet
@@ -36,5 +36,5 @@ oopgrundlagen.exceptions.AlterOutOfBoundException: Alter 121 ist nicht im Bereic
 	at oopgrundlagen.exceptions.Person.setAlter(Person.java:20)
 	at oopgrundlagen.logging.LoggingTest.testPerson(LoggingTest.java:49)
 	at oopgrundlagen.logging.LoggingTest.doWork(LoggingTest.java:37)
-	at global.Main.main(Main.java:16)
+	at global.Main.main(global.global.Main.java:16)
 
