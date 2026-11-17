@@ -11,6 +11,24 @@ public class Hund extends Tier{
         this.apportiertGerne = apportiertGerne;
     }
 
+    public String getRasse() {
+        return rasse;
+    }
+
+    public Hund setRasse(String rasse) {
+        this.rasse = rasse;
+        return this;
+    }
+
+    public boolean isApportiertGerne() {
+        return apportiertGerne;
+    }
+
+    public Hund setApportiertGerne(boolean apportiertGerne) {
+        this.apportiertGerne = apportiertGerne;
+        return this;
+    }
+
     @Override
     public void laufen(int distanz) {
         if(distanz > 0 && energie > distanz*2) {

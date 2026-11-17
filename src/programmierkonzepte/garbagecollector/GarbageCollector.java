@@ -10,7 +10,7 @@ import java.nio.file.Path;
 public class GarbageCollector implements Workable {
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
 
     @Override
