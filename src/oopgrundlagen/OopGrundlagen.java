@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class OopGrundlagen implements Workable {
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
     @Override
     public void doWork() {

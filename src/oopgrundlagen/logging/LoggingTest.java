@@ -27,7 +27,7 @@ public class LoggingTest implements Workable {
 
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
 
     @Override
