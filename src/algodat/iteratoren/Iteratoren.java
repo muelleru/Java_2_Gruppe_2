@@ -30,6 +30,23 @@ public class Iteratoren implements Workable {
             System.out.println(elem);
         }
         System.out.println(liste);
+
+        // Remove mit for-each
+        ArrayList<String> removeListe = new ArrayList<>();
+        for(String elem : liste) {
+            if(elem.startsWith("Ma")) {
+                removeListe.add(elem);
+            }
+        }
+        for (String elem : removeListe)
+        {
+            liste.remove(elem);
+        }
+        System.out.println(liste);
+
+        liste.removeIf( x-> x.startsWith("Ka") );
+        System.out.println(liste);
+
     }
 
     @Override
