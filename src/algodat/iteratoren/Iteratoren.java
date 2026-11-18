@@ -5,9 +5,8 @@ import oopgrundlagen.tiere.Hund;
 import oopgrundlagen.tiere.Katze;
 import oopgrundlagen.tiere.Tier;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Iteratoren implements Workable {
     @Override
@@ -102,20 +101,75 @@ public class Iteratoren implements Workable {
         System.out.println("**************");
         System.out.println(myArrayList);
 
-
-
         MyArrayList<Integer> test = new MyArrayList<>();
-
 
         System.out.println(myArrayList.getClass().getTypeName());
         System.out.println(myArrayList.getClass() == test.getClass());
         System.out.println(myArrayList.getClass().getTypeName() == test.getClass().getTypeName());
+    }
+
+    public void testMap() {
+        // Schlüssel + Wert
+        // Key + Value
+        // Key-Value-Pair Listen
+        // Dictionary, Assoziatives Array, Map
+
+        Map<String,Integer> mapping = new HashMap<>();
+        mapping.put("Eins",1);
+        mapping.put("Zwei",2);
+        mapping.put("Drei",3);
+        System.out.println(mapping.get("Zwei"));
+
+        mapping.putAll(Map.of("Vier",4,"Fünf",5,"Sechs",6));
+
+        System.out.println(mapping.get("Vier") * mapping.get("Sechs"));
+
+        Map<String, Object> person = new HashMap<>(Map.of(
+                "Vorname","Max",
+                "Nachname","Mustermann",
+                "Geburt", LocalDate.of(2001,12,24),
+                "Id",42
+        ));
+        System.out.println(person.get("Nachname"));
+        person.put("Gehalt",10_000);
+        System.out.println(person);
+
+        /* JavaScriptObjectNotation JSON
+           {
+            "Vorname":  "Max",
+            "Nachname": "Mustermann",
+            "Geburt" :  "2001-12-24",
+            "Id" : 42
+           }
+         */
+
+        // Iteration über Keys
+        System.out.println("**** Iteration über Keys ***");
+        for(String attr : person.keySet()) {
+            System.out.println(attr + " => " + person.get(attr));
+        }
+
+        // Iteration über Key-Value-Pairs
+        System.out.println("**** Iteration über Key-Values ***");
+        for(/* var */ Map.Entry<String, Object> kvp : person.entrySet()) {
+            System.out.println(kvp.getKey() + " => " + kvp.getValue());
+        }
 
     }
 
+    // Verkettete Liste LinkedList
+    // item -> item -> newitem -> item
+
+    // Mengen Set    TreeSet HashSet ...
+    // => keine doppelten Elemente!!!
+
+    // Queue, Stack, ...
+
+
     @Override
     public void doWork() {
-        testMyArrayList();
+        testMap();
+        //testMyArrayList();
         //testZoo();
         //testIterator();
     }
