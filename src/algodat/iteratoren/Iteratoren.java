@@ -231,10 +231,50 @@ public class Iteratoren implements Workable {
 
     void testSort() {
         ArrayList<String> kennzeichen = new ArrayList<>(List.of("KA","S","M","A","HH"));
+        // V1: Collections.Sort()
+        System.out.println("UNSORT: " + kennzeichen);
+        //  Comparable<T> muss implementiert sein
+        Collections.sort(kennzeichen); // String::compareTo
+        System.out.println("SORT: " + kennzeichen);
+        System.out.println("Comp(A,B) => " + "A".compareTo("B"));
+        System.out.println("Comp(A,A) => " + "A".compareTo("A"));
+        System.out.println("Comp(C,A) => " + "C".compareTo("A"));
 
+        // Comparator<T> => Functional Interface
+        // compare(T a, T b)
+
+        Collections.sort(kennzeichen, new MyCompare());
+        System.out.println("SORT (Class): " + kennzeichen);
+
+        Collections.sort(kennzeichen, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        System.out.println("SORT (Anonymous Class): " + kennzeichen);
+
+        Collections.sort(kennzeichen, (x,y) -> x.compareTo(y));
+        System.out.println("SORT (Lambda-Ausdruck): " + kennzeichen);
+
+        // Sort in ArrayList mit Comparator
+        kennzeichen.sort((x,y) -> x.compareTo(y));
 
     }
+    class MyCompare implements Comparator<String> {
 
+        @Override
+        public int compare(String o1, String o2) {
+            // return 1 oder 0 oder -1
+            if(o1.length() > o2.length()) {
+                return 1;
+            } else if (o1.length() == o2.length()) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+    }
 
     // Mengen Set    TreeSet HashSet ...
     // => keine doppelten Elemente!!!
@@ -244,7 +284,8 @@ public class Iteratoren implements Workable {
 
     @Override
     public void doWork() {
-        testSet();
+        testSort();
+        //testSet();
         //  testLinkedList();
         //testMap();
         //testMyArrayList();
