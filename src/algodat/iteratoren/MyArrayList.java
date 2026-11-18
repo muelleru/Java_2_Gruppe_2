@@ -1,9 +1,25 @@
 package algodat.iteratoren;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 // <T extends Number > mit Einschränkung T muss von Number abgeleitet sein
-public class MyArrayList<T> {
+public class MyArrayList<T> implements Iterable<T>{
+
+    class MyArrayListIterator<T> implements Iterator<T> {
+        private int itPos = 0;
+        @Override
+        public boolean hasNext() {
+            return itPos < pos; // man kann auf die Felder von MyArrayList zugreifen
+        }
+        @Override
+        public T next() {
+            T elem = (T)array[itPos++];
+            return elem;
+            // return (T)array[itPos++];
+        }
+    }
 
     // private T[] array;
     private Object[] array;
@@ -47,7 +63,6 @@ public class MyArrayList<T> {
             remove(index);
         }
     }
-
     public int indexOf(T item) {
         for(int i = 0; i<pos;i++) {
             if(array[i].equals(item)) {
@@ -57,7 +72,17 @@ public class MyArrayList<T> {
         return -1;
     }
 
-    public T get(int pos) {
+    public T get(int index) {
+        if(index >=0 && index < pos) {
+            return (T)array[index];
+        }
+        return null;
+        // throw new NoSuchElementException();
+        // throw new IndexOutOfBoundsException();
+    }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyArrayListIterator<T>();// IteratorObject
     }
 }
