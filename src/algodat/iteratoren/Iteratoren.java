@@ -101,6 +101,16 @@ public class Iteratoren implements Workable {
 
         System.out.println("**************");
         System.out.println(myArrayList);
+
+
+
+        MyArrayList<Integer> test = new MyArrayList<>();
+
+
+        System.out.println(myArrayList.getClass().getTypeName());
+        System.out.println(myArrayList.getClass() == test.getClass());
+        System.out.println(myArrayList.getClass().getTypeName() == test.getClass().getTypeName());
+
     }
 
     @Override
