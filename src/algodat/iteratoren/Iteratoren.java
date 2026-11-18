@@ -73,9 +73,40 @@ public class Iteratoren implements Workable {
         wilhelma.forEach(System.out::println);
     }
 
+    public void testMyArrayList() {
+        MyArrayList<String> myArrayList = new MyArrayList<>();
+        myArrayList.add("Karlsruhe");
+        myArrayList.add("Stuttgart");
+        myArrayList.add("Pforzheim");
+        myArrayList.add("Karlsbad");
+        myArrayList.add("Leonberg");
+        for (String ort : myArrayList) {
+            System.out.println(ort);
+        }
+        System.out.println("********* Remove(2) ********* ");
+        myArrayList.remove(2);
+        for (String ort : myArrayList) {
+            System.out.println(ort);
+        }
+
+        System.out.println("********* Iterator ******");
+        Iterator<String> it = myArrayList.iterator();
+        while(it.hasNext()) {
+            System.out.println(it.next());
+        }
+
+        System.out.println("**************");
+        myArrayList.remove("Stuttgart");
+        myArrayList.forEach(System.out::println);
+
+        System.out.println("**************");
+        System.out.println(myArrayList);
+    }
+
     @Override
     public void doWork() {
-        testZoo();
+        testMyArrayList();
+        //testZoo();
         //testIterator();
     }
 }
