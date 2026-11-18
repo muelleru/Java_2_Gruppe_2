@@ -1,6 +1,6 @@
 module Java2G2 {
 
-    requires HelperLibrary;
+   // requires HelperLibrary;
     requires java.logging;
     requires java.desktop;
 

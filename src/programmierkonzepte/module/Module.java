@@ -1,7 +1,7 @@
 package programmierkonzepte.module;
 
 // import de.kvbw.dummy.Dummy;
-import de.kvbw.helper.ConsoleHelper;
+// import de.kvbw.helper.ConsoleHelper;
 import global.Workable;
 
 public class Module implements Workable {
@@ -11,8 +11,8 @@ public class Module implements Workable {
     }
 
     public void testConsole() {
-        int z1 = ConsoleHelper.getInstance().readInteger("Zahl",0,120);
-        System.out.println(z1);
+       // int z1 = ConsoleHelper.getInstance().readInteger("Zahl",0,120);
+      //  System.out.println(z1);
 //        System.out.println(Dummy.getZahl());
     }
     @Override

@@ -19,9 +19,10 @@ import java.util.function.Consumer;
 public class AlgoDat implements Workable {
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
 
+    //region ArrayList
     public void testArray() {
         int array[] = new int[10];
         String namen[] = new String[] {"Anton","Berta","Cäsar"};
@@ -142,6 +143,7 @@ public class AlgoDat implements Workable {
         System.out.println(list1); // []
     }
 
+//endregion
 
     @Override
     public void doWork() {
