@@ -160,6 +160,82 @@ public class Iteratoren implements Workable {
     // Verkettete Liste LinkedList
     // item -> item -> newitem -> item
 
+    public void testLinkedList() {
+
+        LinkedList<String> liste = new LinkedList<>();
+        ListIterator<String> it;
+
+        liste.add("Karlsruhe");
+        liste.add(0,"Freiburg");
+        liste.addFirst("Augsburg");
+        liste.addLast("München");
+        liste.add(2,"Stuttgart");
+        liste.push("Berlin"); // Stack-Methode !!! fügt vorne an
+        liste.offerFirst("Heilbronn"); //Queue-Methode
+        System.out.println("1: " + liste);
+
+        it = liste.listIterator();
+
+        System.out.println("NEXT: " + it.next());
+        System.out.println("NEXT: " + it.next());
+        System.out.println("NEXT: " + it.next());
+        System.out.println("NEXT: " + it.next());
+
+        it.add("Hamburg");
+
+        System.out.println("2: " + liste);
+        System.out.println("NEXT: " + it.next());
+        System.out.println("NEXT: " + it.next());
+
+        it.add("Bremen");
+
+        it.previous();
+        it.previous();
+
+        it.set("New York");
+
+        // System.out.println("Pop: " + liste.pop());
+        System.out.println(liste);
+
+
+//        Stack<String> stack = new Stack<>();
+//        stack.push("A");
+//        stack.push("B");
+//        stack.push("C");
+//        System.out.println("Stack :" + stack);
+//        System.out.println("index 0 : " + stack.get(0));
+//        while(stack.size()>0) {
+//            System.out.println(stack.pop());
+//        }
+
+        // Deque<String> deque = new ArrayDeque<String>(liste);
+
+    }
+
+    public void testSet() {
+
+        Set<String> set1 = new HashSet<>(Set.of("KA","S","M"));
+        set1.add("LB");
+        set1.add("KA");
+        System.out.println(set1);
+
+        Set<String> set2 = new TreeSet<>(Set.of("KA","S","M","A","HH"));
+        set2.add("LB");
+        set2.add("KA");
+        System.out.println(set2);
+
+
+        // TreeMap<String,String> hm = new TreeMap<>();
+
+    }
+
+    void testSort() {
+        ArrayList<String> kennzeichen = new ArrayList<>(List.of("KA","S","M","A","HH"));
+
+
+    }
+
+
     // Mengen Set    TreeSet HashSet ...
     // => keine doppelten Elemente!!!
 
@@ -168,7 +244,9 @@ public class Iteratoren implements Workable {
 
     @Override
     public void doWork() {
-        testMap();
+        testSet();
+        //  testLinkedList();
+        //testMap();
         //testMyArrayList();
         //testZoo();
         //testIterator();
