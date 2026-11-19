@@ -4,5 +4,6 @@ module Java2G2 {
     requires java.logging;
     requires java.desktop;
     requires java.sql;
+    requires java.compiler;
 
 }

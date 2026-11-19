@@ -2,6 +2,7 @@ package db;
 
 import global.Workable;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class DbTest implements Workable {
@@ -155,11 +156,30 @@ public class DbTest implements Workable {
 
     }
 
+
+    void testWetterDb()
+    {
+        WetterDb.setMessager( s -> System.out.println(s) );
+        //     JOptionPane.showMessageDialog(null,s);
+
+       try( WetterDb db = new WetterDb())  {
+
+
+
+
+       } catch (Exception ex) {
+           System.out.println(ex.getMessage());
+
+       }
+
+    }
+
     @Override
     public void doWork() {
-        testInsert(new Wetterdaten(2026, 11).setRain(10.0).setTmax(20.0).setTmin(10.0));
+       testWetterDb();
+        // testInsert(new Wetterdaten(2026, 11).setRain(10.0).setTmax(20.0).setTmin(10.0));
         //testSelectDyn("select yyyy, sum(rain) as r from wetterdaten group by yyyy");
-        testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
+        //testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
         //  testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
         // testSelect("select * from wetterdaten where yyyy >= 2026");
         //testConnection();
