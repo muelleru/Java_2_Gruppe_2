@@ -2,6 +2,7 @@ package global;
 
 import algodat.AlgoDat;
 import algodat.iteratoren.Iteratoren;
+import db.DbTest;
 import oopgrundlagen.OopGrundlagen;
 import oopgrundlagen.logging.LoggingTest;
 import programmierkonzepte.garbagecollector.GarbageCollector;
@@ -21,6 +22,7 @@ public class Main {
         workables.add(new Module());
         workables.add(new AlgoDat());
         workables.add(new Iteratoren());
+        workables.add(new DbTest());
         for(Workable w : workables) {
             if(w.isActive()) {
                 w.doWork();

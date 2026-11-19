@@ -11,7 +11,7 @@ import java.util.*;
 public class Iteratoren implements Workable {
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
 
 

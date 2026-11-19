@@ -2,7 +2,6 @@
   <library name="HelperLibrary">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../HelperLibrary.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../mariadb-java-client-4.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
