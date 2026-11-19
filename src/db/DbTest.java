@@ -121,7 +121,7 @@ public class DbTest implements Workable {
 
     @Override
     public void doWork() {
-        testSelectDyn("select yyyy, sum(rain) from wetterdaten group by yyyy");
+        testSelectDyn("select yyyy, sum(rain) as r from wetterdaten group by yyyy");
         testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
         // testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
         // testSelect("select * from wetterdaten where yyyy >= 2026");
