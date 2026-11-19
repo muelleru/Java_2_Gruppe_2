@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GuiTest implements Workable {
 
@@ -45,6 +47,24 @@ public class GuiTest implements Workable {
             JButton btnOk = new JButton("OK");
             mainPanel.add(btnClear);
             mainPanel.add(btnOk);
+            txtVorname.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                }
+                @Override
+                public void keyPressed(KeyEvent e) {
+                }
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if (txtVorname.getText().length() > 3) {
+                        txtVorname.setBackground(Color.GREEN);
+                    } else if (txtVorname.getText().length() == 0) {
+                        txtVorname.setBackground(Color.WHITE);
+                    } else {
+                        txtVorname.setBackground(Color.ORANGE);
+                    }
+                }
+            });
             btnClear.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
