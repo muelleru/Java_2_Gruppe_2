@@ -39,11 +39,22 @@ public class DbTest implements Workable {
             System.out.println("Verbindung OK");
             try (Statement statement = con.createStatement()) {
                 // Statement Objekt erzeugen
+                // DatabaseMetaData meta = con.getMetaData();
+                // ResultSet metaRs = meta.getColumns("wetter",null,"wetterdaten","%");
+
                 try (ResultSet resultset = statement.executeQuery(sql)) {
                     // ResultSet => Zugriff auf die Tabellendaten
                     // Vergleichbar mit dem Iterator aus den Collections
                     // next() springt zum nächsten Datensatz, falls vorhanden
                     //
+                    System.out.printf("| %4s | %2s | %6s | %6s | %6s | %6s | %6s |\n",
+                            "yyyy", "mm",
+                            "rain",
+                             "sun",
+                             "tmin",
+                             "tmax",
+                             "af"
+                    );
                     while (resultset.next()) {
                         // Zugriff auf einen einzelnen Datensatz
                         // System.out.print("Feld 1 : " + resultset.getObject(1));
@@ -51,7 +62,14 @@ public class DbTest implements Workable {
                         int jahr = resultset.getInt("yyyy");
                         int monat = resultset.getInt("mm");
                         double rain = resultset.getDouble("rain");
-                        System.out.printf("| %4d | %2d | %6.2f |\n", jahr, monat, rain);
+                        System.out.printf("| %4d | %2d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |\n",
+                                jahr, monat,
+                                rain,
+                                resultset.getDouble("sun"),
+                                resultset.getDouble("tmin"),
+                                resultset.getDouble("tmax"),
+                                resultset.getInt("af")
+                                );
                     }
                 }
             }
@@ -64,7 +82,8 @@ public class DbTest implements Workable {
 
     @Override
     public void doWork() {
-        testSelect("select * from wetterdaten where yyyy >= 2026");
+        testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
+        // testSelect("select * from wetterdaten where yyyy >= 2026");
         //testConnection();
     }
 }
