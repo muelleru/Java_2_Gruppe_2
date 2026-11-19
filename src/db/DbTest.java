@@ -30,6 +30,45 @@ public class DbTest implements Workable {
         }
     }
 
+    void testSelectDyn(String sql) {
+        String connectionString = "jdbc:mariadb://localhost:3306/wetter?sslMode=disable";
+        String user = "root";
+        String pw = "";
+        try (Connection con = DriverManager.getConnection(connectionString, user, pw)) {
+            DatabaseMetaData metaDb = con.getMetaData();
+            System.out.println("User: " + metaDb.getUserName());
+            System.out.println("Verbindung OK");
+            try (Statement statement = con.createStatement()) {
+                try (ResultSet resultset = statement.executeQuery(sql)) {
+
+                    ResultSetMetaData metaRs = resultset.getMetaData();
+                    // Überschrift drucken
+                    for(int i = 1; i<= metaRs.getColumnCount();i++) {
+                        System.out.printf("| %-8s ", metaRs.getColumnName(i));
+                    }
+                    System.out.println("|");
+                    while(resultset.next()) {
+                        for(int i = 1; i<= metaRs.getColumnCount();i++) {
+                            switch(metaRs.getColumnTypeName(i).toLowerCase()) {
+                                case "double":
+                                    System.out.printf("| %8.2f ",resultset.getDouble(i));
+                                    break;
+                                case "integer":
+                                case "int":
+                                    System.out.printf("| %8d ",resultset.getInt(i));
+                                    break;
+                            }
+                        }
+                        System.out.println("|");
+                    }
+                }
+            }
+        } catch(SQLException ex) {
+            System.out.println("Fehler beim Ausführen der Anweisung");
+            ex.printStackTrace();
+        }
+    }
+
     void testSelect(String sql) {
         String connectionString = "jdbc:mariadb://localhost:3306/wetter?sslMode=disable";
         String user = "root";
@@ -50,10 +89,10 @@ public class DbTest implements Workable {
                     System.out.printf("| %4s | %2s | %6s | %6s | %6s | %6s | %6s |\n",
                             "yyyy", "mm",
                             "rain",
-                             "sun",
-                             "tmin",
-                             "tmax",
-                             "af"
+                            "sun",
+                            "tmin",
+                            "tmax",
+                            "af"
                     );
                     while (resultset.next()) {
                         // Zugriff auf einen einzelnen Datensatz
@@ -69,7 +108,7 @@ public class DbTest implements Workable {
                                 resultset.getDouble("tmin"),
                                 resultset.getDouble("tmax"),
                                 resultset.getInt("af")
-                                );
+                        );
                     }
                 }
             }
@@ -82,7 +121,9 @@ public class DbTest implements Workable {
 
     @Override
     public void doWork() {
-        testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
+        testSelectDyn("select yyyy, sum(rain) from wetterdaten group by yyyy");
+        testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
+        // testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
         // testSelect("select * from wetterdaten where yyyy >= 2026");
         //testConnection();
     }
