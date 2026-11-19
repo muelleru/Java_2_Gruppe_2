@@ -90,7 +90,7 @@ public class Wetterdaten {
     }
 
     public String toString() {
-        // "| %4d | %2d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |".formatted()
+        // "| %4d | %2d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |".formatted( getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf())
         return String.format("| %6d | %6d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |",
                 getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
     }

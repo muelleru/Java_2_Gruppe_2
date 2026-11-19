@@ -4,12 +4,13 @@ import global.Workable;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.Collection;
 
 public class DbTest implements Workable {
 
     @Override
     public boolean isActive() {
-        return true;
+        return false;
     }
 
     public void testConnection() {
@@ -54,13 +55,13 @@ public class DbTest implements Workable {
 //                            } else {
                             switch (metaRs.getColumnTypeName(i).toLowerCase()) {
                                 case "double":
-                                    Double v = (Double)resultset.getObject(i,Double.class);
-                                    System.out.printf( (v!=null ? "| %8.2f " : "|   NULL   "), v);
+                                    Double v = (Double) resultset.getObject(i, Double.class);
+                                    System.out.printf((v != null ? "| %8.2f " : "|   NULL   "), v);
                                     break;
                                 case "integer":
                                 case "int":
-                                    Integer x = (Integer)resultset.getObject(i,Integer.class);
-                                    System.out.printf( (x!=null ? "| %8d " : "|          "), x);
+                                    Integer x = (Integer) resultset.getObject(i, Integer.class);
+                                    System.out.printf((x != null ? "| %8d " : "|          "), x);
                                     // System.out.printf("| %8d ", (Integer) resultset.getObject(i,Integer.class));
                                     break;
                             }
@@ -157,26 +158,29 @@ public class DbTest implements Workable {
     }
 
 
-    void testWetterDb()
-    {
-        WetterDb.setMessager( s -> System.out.println(s) );
+    void testWetterDb() {
+        WetterDb.setMessager(s -> System.out.println(s));
         //     JOptionPane.showMessageDialog(null,s);
-
-       try( WetterDb db = new WetterDb())  {
-
-
-
-
-       } catch (Exception ex) {
-           System.out.println(ex.getMessage());
-
-       }
+        try (WetterDb db = new WetterDb()) {
+          //  db.getWetterdaten().forEach(System.out::println);
+            Collection<Wetterdaten> liste = db.getWetterdaten();
+            for(var wd : liste) {
+                if(wd.getTmax()>25) {
+                    System.out.println("DS: " + wd + " ***");
+                }
+            }
+            db.insertWetterdaten(new Wetterdaten(2026,12).setRain(42.0));
+            System.out.println(db.getWetterdaten(2026,12));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
 
     }
 
     @Override
     public void doWork() {
-       testWetterDb();
+        testWetterDb();
         // testInsert(new Wetterdaten(2026, 11).setRain(10.0).setTmax(20.0).setTmin(10.0));
         //testSelectDyn("select yyyy, sum(rain) as r from wetterdaten group by yyyy");
         //testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
