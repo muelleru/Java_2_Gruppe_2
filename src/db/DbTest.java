@@ -42,27 +42,31 @@ public class DbTest implements Workable {
                 try (ResultSet resultset = statement.executeQuery(sql)) {
                     ResultSetMetaData metaRs = resultset.getMetaData();
                     // Überschrift drucken
-                    for(int i = 1; i<= metaRs.getColumnCount();i++) {
+                    for (int i = 1; i <= metaRs.getColumnCount(); i++) {
                         System.out.printf("| %-8s ", metaRs.getColumnName(i));
                     }
                     System.out.println("|");
-                    while(resultset.next()) {
-                        for(int i = 1; i<= metaRs.getColumnCount();i++) {
-                            switch(metaRs.getColumnTypeName(i).toLowerCase()) {
-                                case "double":
-                                    System.out.printf("| %8.2f ",resultset.getDouble(i));
-                                    break;
-                                case "integer":
-                                case "int":
-                                    System.out.printf("| %8d ",resultset.getInt(i));
-                                    break;
+                    while (resultset.next()) {
+                        for (int i = 1; i <= metaRs.getColumnCount(); i++) {
+                            if (resultset.getObject(i) == null) {
+                                System.out.printf("| %8s ","NULL");
+                            } else {
+                                switch (metaRs.getColumnTypeName(i).toLowerCase()) {
+                                    case "double":
+                                        System.out.printf("| %8.2f ", resultset.getDouble(i));
+                                        break;
+                                    case "integer":
+                                    case "int":
+                                        System.out.printf("| %8d ", resultset.getInt(i));
+                                        break;
+                                }
                             }
                         }
                         System.out.println("|");
                     }
                 }
             }
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Fehler beim Ausführen der Anweisung");
             ex.printStackTrace();
         }
@@ -119,16 +123,41 @@ public class DbTest implements Workable {
     // void testInsert(int yyyy, int mm, double rain ...);
 
     void testInsert(Wetterdaten wetterdaten) {
-
-
+        String user = "root";
+        String pw = "";
+        String cs = "jdbc:mariadb://localhost:3306?sslMode=disabled";
+        // cs ohne Datenbank
+        String sql = """
+                insert into wetterdaten(yyyy,mm,rain,af,tmin,tmax,sun) 
+                values(?,?,?,?,?,?,?)
+                """;
+        // ? => Platzhalter
+        try (Connection connection = DriverManager.getConnection(cs, user, pw)) {
+            connection.setCatalog("wetter"); // use wetter;
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, wetterdaten.getYyyy());
+                statement.setInt(2, wetterdaten.getMm());
+                statement.setObject(3, wetterdaten.getRain(), Types.DOUBLE);
+                statement.setObject(4, wetterdaten.getAf(), Types.INTEGER);
+                statement.setObject(5, wetterdaten.getTmin(), Types.DOUBLE);
+                statement.setObject(6, wetterdaten.getTmax(), Types.DOUBLE);
+                statement.setObject(7, wetterdaten.getSun()/*, Types.DOUBLE*/);
+                int count = statement.executeUpdate();
+                System.out.println(count + " Daten geändert");
+            }
+        } catch (Exception e) {
+            System.out.println("ERRROOOORRR");
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void doWork() {
-        testSelectDyn("select yyyy, sum(rain) as r from wetterdaten group by yyyy");
+        testInsert(new Wetterdaten(2026, 11).setRain(10.0).setTmax(20.0).setTmin(10.0));
+        //testSelectDyn("select yyyy, sum(rain) as r from wetterdaten group by yyyy");
         testSelectDyn("select yyyy, mm,  af, tmax, tmin, sun, rain from wetterdaten where yyyy >= 2026");
-        // testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
+        //  testSelect("select yyyy, mm, rain, af, tmax, tmin, sun from wetterdaten where yyyy >= 2026");
         // testSelect("select * from wetterdaten where yyyy >= 2026");
         //testConnection();
     }
