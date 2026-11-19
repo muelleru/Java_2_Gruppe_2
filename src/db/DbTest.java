@@ -40,7 +40,6 @@ public class DbTest implements Workable {
             System.out.println("Verbindung OK");
             try (Statement statement = con.createStatement()) {
                 try (ResultSet resultset = statement.executeQuery(sql)) {
-
                     ResultSetMetaData metaRs = resultset.getMetaData();
                     // Überschrift drucken
                     for(int i = 1; i<= metaRs.getColumnCount();i++) {
@@ -117,7 +116,13 @@ public class DbTest implements Workable {
             ex.printStackTrace();
         }
     }
+    // void testInsert(int yyyy, int mm, double rain ...);
 
+    void testInsert(Wetterdaten wetterdaten) {
+
+
+
+    }
 
     @Override
     public void doWork() {
