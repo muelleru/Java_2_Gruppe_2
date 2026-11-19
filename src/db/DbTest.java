@@ -48,19 +48,22 @@ public class DbTest implements Workable {
                     System.out.println("|");
                     while (resultset.next()) {
                         for (int i = 1; i <= metaRs.getColumnCount(); i++) {
-                            if (resultset.getObject(i) == null) {
-                                System.out.printf("| %8s ","NULL");
-                            } else {
-                                switch (metaRs.getColumnTypeName(i).toLowerCase()) {
-                                    case "double":
-                                        System.out.printf("| %8.2f ", resultset.getDouble(i));
-                                        break;
-                                    case "integer":
-                                    case "int":
-                                        System.out.printf("| %8d ", resultset.getInt(i));
-                                        break;
-                                }
+//                            if (resultset.getObject(i) == null) {
+//                                System.out.printf("| %8s ","NULL");
+//                            } else {
+                            switch (metaRs.getColumnTypeName(i).toLowerCase()) {
+                                case "double":
+                                    Double v = (Double)resultset.getObject(i,Double.class);
+                                    System.out.printf( (v!=null ? "| %8.2f " : "|   NULL   "), v);
+                                    break;
+                                case "integer":
+                                case "int":
+                                    Integer x = (Integer)resultset.getObject(i,Integer.class);
+                                    System.out.printf( (x!=null ? "| %8d " : "|          "), x);
+                                    // System.out.printf("| %8d ", (Integer) resultset.getObject(i,Integer.class));
+                                    break;
                             }
+                            // }
                         }
                         System.out.println("|");
                     }
