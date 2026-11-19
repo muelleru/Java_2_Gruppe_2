@@ -1,9 +1,9 @@
 package db;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class WetterDb implements AutoCloseable {
 
@@ -43,6 +43,42 @@ public class WetterDb implements AutoCloseable {
     private String user;
     private String pw;
     private String cs;
+
+    // Get (select), Put (update), Post (insert), Delete
+
+    public Collection<Wetterdaten> getWetterdaten() throws SQLException {
+       String sql = "select yyyy,mm,rain,sun,tmax,tmin,af from wetterdaten";
+       ArrayList<Wetterdaten> wdliste = new ArrayList<>();
+       if(connection != null && !connection.isClosed()) {
+           try(Statement statement = connection.createStatement()) {
+               try(ResultSet rs = statement.executeQuery(sql)) {
+                   while(rs.next()) {
+                       Wetterdaten wd;
+                       int yyyy = rs.getInt("yyyy");
+                       int mm = rs.getInt("mm");
+                       wd = new Wetterdaten(yyyy,mm);
+                       wd.setRain(rs.getObject("rain",Double.class));
+                       wd.setSun(rs.getObject("sun",Double.class));
+                       wd.setTmax(rs.getObject("tmax",Double.class));
+                       wd.setTmin(rs.getObject("tmin",Double.class));
+                       wd.setAf(rs.getObject("af",Integer.class));
+                       wdliste.add(wd);
+                   } //while
+               } //try
+           } //try
+       } // if
+       return wdliste;
+    }
+
+    public Wetterdaten getWetterdaten(int yyyy, int mm) {
+        return null;
+    }
+
+    public void insertWetterdaten(Wetterdaten wd) {
+
+
+    }
+
 
 
     @Override
