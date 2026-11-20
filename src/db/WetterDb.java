@@ -67,6 +67,7 @@ public class WetterDb implements AutoCloseable {
                 } //try
             } //try
         } // if
+        sendMessage(wdliste.size() + " Wetterdaten geladen");
         return wdliste;
     }
 

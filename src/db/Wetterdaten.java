@@ -94,5 +94,19 @@ public class Wetterdaten {
         return String.format("| %6d | %6d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |",
                 getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
     }
+    public String toCSV() {
+        return String.format("%d;%d;%.2f;%.2f;%.2f;%.2f;%d",
+                getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
+    }
+
+    public static String toCSVHeader() {
+        return "YYYY;MM;Rain;Sun;TMax;TMin;Af";
+    }
+
+    public static Wetterdaten fromCSV(String csv) {
+        // Dummy
+        Wetterdaten wd = new Wetterdaten(0,0);
+        return wd;
+    }
 
 }

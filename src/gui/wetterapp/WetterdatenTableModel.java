@@ -4,6 +4,8 @@ import db.Wetterdaten;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class WetterdatenTableModel extends AbstractTableModel {
 
@@ -12,6 +14,17 @@ public class WetterdatenTableModel extends AbstractTableModel {
     public WetterdatenTableModel() {
         wetterdatenArrayList = new ArrayList<>();
     }
+
+    public void setDaten(Collection<Wetterdaten> wdliste) {
+        wetterdatenArrayList.clear();
+        wetterdatenArrayList.addAll(wdliste);
+        fireTableDataChanged();
+    }
+    public Collection<Wetterdaten> getDaten() {
+        return wetterdatenArrayList;
+    }
+
+
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
