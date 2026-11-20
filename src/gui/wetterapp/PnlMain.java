@@ -1,6 +1,7 @@
 package gui.wetterapp;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class PnlMain {
 
@@ -11,8 +12,16 @@ public class PnlMain {
     private JButton btnSpeichernCSV;
     private JButton btnLoadCSV;
 
+    public PnlMain() {
+        // Einfache
+        // tblWetterdaten.setModel( new DefaultTableModel(new String[]{"Vorname","Nachname"},10));
+
+    }
+
     public JPanel getPnlMain() {
         return pnlMain;
     }
+
+
 
 }
