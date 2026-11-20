@@ -114,7 +114,6 @@ public class Wetterdaten {
         csv = csv.replace(",", ".");
         String felder[] = csv.split(";", 7);
         Wetterdaten wd = new Wetterdaten(0, 0);
-        System.out.println(felder.length);
         wd.setYyyy(felder[0].length() == 0 ? null : Integer.valueOf(felder[0]));
         wd.setMm(felder[1].length() == 0 ? null : Integer.valueOf(felder[1]));
         wd.setRain(felder[2].length() == 0 ? null : Double.valueOf(felder[2]));
