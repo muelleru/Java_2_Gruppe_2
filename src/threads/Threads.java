@@ -49,7 +49,7 @@ public class Threads implements Workable {
 
     @Override
     public void doWork() {
-test2();
+        test2();
     }
 
     public void test2() {
@@ -59,9 +59,11 @@ test2();
 
         ArrayList<Integer> wichtigeZahlen = new ArrayList<>();
         //ConcurrentLinkedQueue<Integer> wichtigeZahlen = new ConcurrentLinkedQueue<>();
-                Thread t1 = new Thread( () -> {
+        Thread t1 = new Thread(() -> {
             for (int i = 1; i <= 20; i++) {
-                synchronized (ampel) {wichtigeZahlen.add(i);}
+                synchronized (ampel) {
+                    wichtigeZahlen.add(i);
+                }
                 try {
                     Thread.sleep(5);
                 } catch (InterruptedException e) {
@@ -69,9 +71,11 @@ test2();
                 }
             }
         });
-        Thread t2 = new Thread( () -> {
+        Thread t2 = new Thread(() -> {
             for (int i = 21; i <= 40; i++) {
-                synchronized (ampel) {wichtigeZahlen.add(i);}
+                synchronized (ampel) {
+                    wichtigeZahlen.add(i);
+                }
                 try {
                     Thread.sleep(5);
                 } catch (InterruptedException e) {
@@ -79,7 +83,7 @@ test2();
                 }
             }
         });
-        Thread t3 = new Thread( () -> {
+        Thread t3 = new Thread(() -> {
             for (int i = 41; i <= 60; i++) {
                 synchronized (ampel) {
                     wichtigeZahlen.add(i);
@@ -91,7 +95,9 @@ test2();
                 }
             }
         });
-        t1.start();t2.start();t3.start();
+        t1.start();
+        t2.start();
+        t3.start();
         try {
             t1.join();
             t2.join();
@@ -100,7 +106,7 @@ test2();
 
         }
         System.out.println("#wichtigeZahlen: " + wichtigeZahlen.size());
-        wichtigeZahlen.sort( (x,y) -> x.compareTo(y));
+        wichtigeZahlen.sort((x, y) -> x.compareTo(y));
         System.out.println(wichtigeZahlen);
 
     }
