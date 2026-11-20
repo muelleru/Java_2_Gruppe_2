@@ -95,8 +95,11 @@ public class Wetterdaten {
                 getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
     }
     public String toCSV() {
-        return String.format("%d;%d;%.2f;%.2f;%.2f;%.2f;%d",
+        String ret =  String.format("%d;%d;%.2f;%.2f;%.2f;%.2f;%d",
                 getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
+        // Trick 17e
+        ret = ret.replace("null","").replace("nu","");
+        return ret;
     }
 
     public static String toCSVHeader() {
