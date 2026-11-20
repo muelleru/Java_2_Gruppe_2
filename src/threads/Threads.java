@@ -2,6 +2,11 @@ package threads;
 
 import global.Workable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 public class Threads implements Workable {
 
     static class MyRunnable implements Runnable {
@@ -44,6 +49,59 @@ public class Threads implements Workable {
 
     @Override
     public void doWork() {
+test2();
+    }
+
+    public void test2() {
+
+        //ArrayList nicht threadsafe!!!
+        // ::add kann unterbrochen werden und es kommt zu Verlusten ...
+
+        ArrayList<Integer> wichtigeZahlen = new ArrayList<>();
+        //ConcurrentLinkedQueue<Integer> wichtigeZahlen = new ConcurrentLinkedQueue<>();
+                Thread t1 = new Thread( () -> {
+            for (int i = 1; i <= 20; i++) {
+                synchronized (ampel) {wichtigeZahlen.add(i);}
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    System.out.println("MIST :::");
+                }
+            }
+        });
+        Thread t2 = new Thread( () -> {
+            for (int i = 21; i <= 40; i++) {
+                synchronized (ampel) {wichtigeZahlen.add(i);}
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    System.out.println("MIST :::");
+                }
+            }
+        });
+        Thread t3 = new Thread( () -> {
+            for (int i = 41; i <= 60; i++) {
+                synchronized (ampel) {
+                    wichtigeZahlen.add(i);
+                }
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    System.out.println("MIST :::");
+                }
+            }
+        });
+        t1.start();t2.start();t3.start();
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+        } catch (InterruptedException e) {
+
+        }
+        System.out.println("#wichtigeZahlen: " + wichtigeZahlen.size());
+        wichtigeZahlen.sort( (x,y) -> x.compareTo(y));
+        System.out.println(wichtigeZahlen);
 
     }
 
