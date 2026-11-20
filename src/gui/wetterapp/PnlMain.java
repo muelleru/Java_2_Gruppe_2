@@ -11,11 +11,13 @@ public class PnlMain {
     private JButton btnLoadDb;
     private JButton btnSpeichernCSV;
     private JButton btnLoadCSV;
-
+    private WetterdatenTableModel model;
     public PnlMain() {
         // Einfache
         // tblWetterdaten.setModel( new DefaultTableModel(new String[]{"Vorname","Nachname"},10));
-
+        model = new WetterdatenTableModel();
+        tblWetterdaten.setModel(model);
+        model.fireTableDataChanged();
     }
 
     public JPanel getPnlMain() {
