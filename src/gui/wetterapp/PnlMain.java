@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class PnlMain {
@@ -85,7 +86,10 @@ public class PnlMain {
                     JFileChooser.APPROVE_OPTION) {
                 String filename = fileDialog.getSelectedFile().getPath();
                 try {
+                   // ArrayList<Wetterdaten> wdl = new ArrayList<>();
                     WetterdatenIO.getInstance().loadWetterdaten(model.getDaten(), filename);
+                    model.fireTableDataChanged();
+                    //model.setDaten(wdl);
                     JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Daten geladen");
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Error: " + ex.getMessage());

@@ -1,5 +1,7 @@
 package db;
 
+import java.util.ArrayList;
+
 public class Wetterdaten {
 
     private Integer yyyy;
@@ -12,7 +14,7 @@ public class Wetterdaten {
 
 
     public Wetterdaten(Integer yyyy, Integer mm) {
-        this(yyyy,mm,null,null,null,null,null);
+        this(yyyy, mm, null, null, null, null, null);
     }
 
     public Wetterdaten(Integer yyyy, Integer mm, Double rain, Double sun, Double tmin, Double tmax, Integer af) {
@@ -92,13 +94,14 @@ public class Wetterdaten {
     public String toString() {
         // "| %4d | %2d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |".formatted( getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf())
         return String.format("| %6d | %6d | %6.2f | %6.2f | %6.2f | %6.2f | %6d |",
-                getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
+                getYyyy(), getMm(), getRain(), getSun(), getTmax(), getTmin(), getAf());
     }
+
     public String toCSV() {
-        String ret =  String.format("%d;%d;%.2f;%.2f;%.2f;%.2f;%d",
-                getYyyy(),getMm(),getRain(),getSun(),getTmax(),getTmin(),getAf());
+        String ret = String.format("%d;%d;%.2f;%.2f;%.2f;%.2f;%d",
+                getYyyy(), getMm(), getRain(), getSun(), getTmax(), getTmin(), getAf());
         // Trick 17e
-        ret = ret.replace("null","").replace("nu","");
+        ret = ret.replace("null", "").replace("nu", "");
         return ret;
     }
 
@@ -108,7 +111,17 @@ public class Wetterdaten {
 
     public static Wetterdaten fromCSV(String csv) {
         // Dummy
-        Wetterdaten wd = new Wetterdaten(0,0);
+        csv = csv.replace(",", ".");
+        String felder[] = csv.split(";", 7);
+        Wetterdaten wd = new Wetterdaten(0, 0);
+        System.out.println(felder.length);
+        wd.setYyyy(felder[0].length() == 0 ? null : Integer.valueOf(felder[0]));
+        wd.setMm(felder[1].length() == 0 ? null : Integer.valueOf(felder[1]));
+        wd.setRain(felder[2].length() == 0 ? null : Double.valueOf(felder[2]));
+        wd.setSun(felder[3].isEmpty() ? null : Double.valueOf(felder[3]));
+        wd.setTmax(felder[4].length() == 0 ? null : Double.valueOf(felder[4]));
+        wd.setTmin(felder[5].length() == 0 ? null : Double.valueOf(felder[5]));
+        wd.setAf(felder[6].length() == 0 ? null : Integer.valueOf(felder[6]));
         return wd;
     }
 
