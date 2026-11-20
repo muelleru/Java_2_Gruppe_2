@@ -68,13 +68,36 @@ public class PnlMain {
                 }
             }
         });
-        btnLoadCSV.addActionListener((e)->{   });
+        btnLoadCSV.addActionListener((e)->{
+            JFileChooser fileDialog = new JFileChooser();
+            fileDialog.setDialogType(JFileChooser.OPEN_DIALOG);
+            fileDialog.setCurrentDirectory(new File("c:\\temp"));
+
+            fileDialog.setFileFilter(
+                    new FileNameExtensionFilter("CSV-Dateien (*.csv)", "csv")
+            );
+            fileDialog.addChoosableFileFilter(new FileNameExtensionFilter("Textdateien (*.txt)","txt"));
+
+            // Auswahl „Alle Dateien“ deaktivieren
+            fileDialog.setAcceptAllFileFilterUsed(false);
+
+            if(fileDialog.showDialog(pnlMain.getRootPane(),"Laden") ==
+                    JFileChooser.APPROVE_OPTION) {
+                String filename = fileDialog.getSelectedFile().getPath();
+                try {
+                    WetterdatenIO.getInstance().loadWetterdaten(model.getDaten(), filename);
+                    JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Daten geladen");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Error: " + ex.getMessage());
+                }
+            }
+
+
+        });
     }
 
     public JPanel getPnlMain() {
         return pnlMain;
     }
-
-
 
 }

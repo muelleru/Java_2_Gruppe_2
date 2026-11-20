@@ -1,5 +1,6 @@
 package db;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,8 +41,17 @@ public class WetterdatenIO {
 
     }
 
-    public void loadWetterdaten(Collection<Wetterdaten> wdliste, String filename) {
-
+    public void loadWetterdaten(Collection<Wetterdaten> wdliste, String filename) throws IOException{
+        Path path = Path.of(filename);
+        if(wdliste != null) {
+            String line;
+            try(BufferedReader reader = Files.newBufferedReader(path)) {
+                line = reader.readLine(); // Überschrift
+                wdliste.clear();
+                while((line = reader.readLine()) != null) {
+                    wdliste.add(Wetterdaten.fromCSV(line));
+                }
+            }
+        }
     }
-
 }
