@@ -86,10 +86,10 @@ public class PnlMain {
                     JFileChooser.APPROVE_OPTION) {
                 String filename = fileDialog.getSelectedFile().getPath();
                 try {
-                   // ArrayList<Wetterdaten> wdl = new ArrayList<>();
+
                     WetterdatenIO.getInstance().loadWetterdaten(model.getDaten(), filename);
                     model.fireTableDataChanged();
-                    //model.setDaten(wdl);
+
                     JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Daten geladen");
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(pnlMain.getRootPane(),"Error: " + ex.getMessage());
