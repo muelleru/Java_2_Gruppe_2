@@ -10,6 +10,7 @@ import oopgrundlagen.logging.LoggingTest;
 import programmierkonzepte.garbagecollector.GarbageCollector;
 import programmierkonzepte.module.Module;
 import programmierkonzepte.reflections.Reflections;
+import threads.Threads;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class Main {
         workables.add(new DbTest());
         workables.add(new GuiTest());
         workables.add(new WetterApp());
+        workables.add(new Threads());
         for(Workable w : workables) {
             if(w.isActive()) {
                 w.doWork();
